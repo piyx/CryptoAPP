@@ -2,17 +2,25 @@ package com.example.stocksandcrypto;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.robinhood.spark.SparkView;
 import com.robinhood.ticker.TickerUtils;
 import com.robinhood.ticker.TickerView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ItemDetails extends AppCompatActivity {
     TextView itemname, priceChangeTV, timeline;
@@ -20,6 +28,8 @@ public class ItemDetails extends AppCompatActivity {
     SparkView sparkline;
     Cryptocurrency cryptocurrency;
     RadioGroup radioGroup;
+    SparklineAdapter adapter;
+    HashMap<String, Timeline> timelineMap = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +42,18 @@ public class ItemDetails extends AppCompatActivity {
         timeline = findViewById(R.id.timeline);
         radioGroup = findViewById(R.id.radiogroup);
 
+        timelineMap.put("1D", Timeline.ONEDAY);
+        timelineMap.put("1W", Timeline.ONEWEEK);
+        timelineMap.put("1M", Timeline.ONEMONTH);
+        timelineMap.put("3M", Timeline.THREEMONTHS);
+        timelineMap.put("1Y", Timeline.ONEYEAR);
+        timelineMap.put("5Y", Timeline.FIVEYEARS);
+
 
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton rb = group.findViewById(checkedId);
+            getSparkline(timelineMap.get(rb.getText()));
         });
 
         tickerView = findViewById(R.id.tickerView);
@@ -50,7 +68,7 @@ public class ItemDetails extends AppCompatActivity {
 
         setInitialData();
 
-        SparklineAdapter adapter = new SparklineAdapter(cryptocurrency.sparklineData);
+        adapter = new SparklineAdapter(cryptocurrency.sparklineData);
         sparkline.setAdapter(adapter);
         sparkline.setScrubListener(
             value -> {
@@ -80,5 +98,38 @@ public class ItemDetails extends AppCompatActivity {
         String sign = priceChange < 0 ? "-" : "+";
         String format = String.format("%sUS$%f (%s%f)", sign, Math.abs(priceChange), sign, Math.abs(priceChangePercent));
         priceChangeTV.setText(format);
+    }
+
+    protected void getSparkline(Timeline timeline) {
+        String API_KEY = "8782750913501ee9f64a6169174314b7ef8c1b10";
+        String[] dateBounds = PricesTimeline.getStartAndEndDate(timeline);
+        String url = String.format(
+                "https://api.nomics.com/v1/currencies/sparkline?key=%s&ids=%s&start=%s",
+                API_KEY, cryptocurrency.symbol.toUpperCase(), dateBounds[0]
+        );
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(
+                Request.Method.GET, url,
+                response -> {
+                    try {
+                        JSONArray prices = new JSONArray(response).getJSONObject(0).getJSONArray("prices");
+                        ArrayList<Float> sparkline = new ArrayList<>();
+                        for (int i = 0; i < prices.length(); i++) {
+                            sparkline.add(Float.parseFloat(prices.getString(i)));
+                        }
+
+                        adapter.update(sparkline);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> {
+                    Intent intent;
+                    // Redirect to error page
+                    System.out.println("Error");
+                }
+        );
+
+        queue.add(request);
     }
 }

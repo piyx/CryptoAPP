@@ -12,6 +12,11 @@ public class SparklineAdapter extends SparkAdapter {
         this.yData = yData;
     }
 
+    public void update(ArrayList<Float> yData) {
+        this.yData = yData;
+        notifyDataSetChanged();
+    }
+
     @Override
     public int getCount() {
         return yData.size();
