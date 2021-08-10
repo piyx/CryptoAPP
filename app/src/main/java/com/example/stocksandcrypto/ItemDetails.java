@@ -3,6 +3,9 @@ package com.example.stocksandcrypto;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.robinhood.spark.SparkView;
@@ -16,6 +19,7 @@ public class ItemDetails extends AppCompatActivity {
     TickerView tickerView;
     SparkView sparkline;
     Cryptocurrency cryptocurrency;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,13 @@ public class ItemDetails extends AppCompatActivity {
         itemname = findViewById(R.id.itemname);
         priceChangeTV = findViewById(R.id.priceChange);
         timeline = findViewById(R.id.timeline);
+        radioGroup = findViewById(R.id.radiogroup);
+
+
+
+        radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            RadioButton rb = group.findViewById(checkedId);
+        });
 
         tickerView = findViewById(R.id.tickerView);
         tickerView.setCharacterLists(TickerUtils.provideNumberList());

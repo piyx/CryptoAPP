@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/rgbackground"
     android:scrollbarSize="30sp"
     tools:context=".ItemDetails">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="#140E28"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,6 +81,49 @@
             android:layout_marginTop="30dp"
             app:spark_lineColor="@color/pink"
             app:spark_scrubEnabled="true" />
+
+        <RadioGroup
+            android:id="@+id/radiogroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="30sp"
+            android:background="@drawable/radio_group_background"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/oneDay"
+                style="@style/radio_button_style"
+                android:checked="true"
+                android:text="1D" />
+
+            <RadioButton
+                android:id="@+id/oneWeek"
+                style="@style/radio_button_style"
+                android:text="1W" />
+
+            <RadioButton
+                android:id="@+id/oneMonth"
+                style="@style/radio_button_style"
+                android:text="1M" />
+
+            <RadioButton
+                android:id="@+id/threeMonth"
+                style="@style/radio_button_style"
+                android:text="3M" />
+
+            <RadioButton
+                android:id="@+id/oneYear"
+                style="@style/radio_button_style"
+                android:text="1Y" />
+
+            <RadioButton
+                android:id="@+id/fiveYear"
+                style="@style/radio_button_style"
+                android:text="5Y" />
+
+        </RadioGroup>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
