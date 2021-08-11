@@ -1,16 +1,17 @@
 package com.example.stocksandcrypto;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
-import com.airbnb.paris.Paris;
-import com.airbnb.paris.styles.Style;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -35,15 +36,43 @@ public class ItemDetails extends AppCompatActivity {
     HashMap<String, Timeline> timelineMap = new HashMap<>();
 
     @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+
+        if (id==android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
 
+
+        // Get the data from intent and parse it
+        String itemdata = getIntent().getStringExtra("itemdata");
+        try {
+            cryptocurrency = Cryptocurrency.parseData(itemdata);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Change action bar to add back button and change its text
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle(cryptocurrency.symbol.toUpperCase() + " " + "Crypto");
+
+        // Initialize all views
         sparkline = findViewById(R.id.sparkline);
         itemname = findViewById(R.id.itemname);
         priceChangeTV = findViewById(R.id.priceChange);
         timelineText = findViewById(R.id.timeline);
         radioGroup = findViewById(R.id.radiogroup);
+        tickerView = findViewById(R.id.tickerView);
+        tickerView.setCharacterLists(TickerUtils.provideNumberList());
 
         timelineMap.put("1D", Timeline.ONEDAY);
         timelineMap.put("1W", Timeline.ONEWEEK);
@@ -53,25 +82,15 @@ public class ItemDetails extends AppCompatActivity {
         timelineMap.put("5Y", Timeline.FIVEYEARS);
 
 
-
+        // Set listener for radio group
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton rb = group.findViewById(checkedId);
             Timeline timeline = timelineMap.get(rb.getText());
             timelineText.setText(timeline.timelineText);
             getSparkline(timeline);
-            changeTheme(getPriceChange());
         });
 
-        tickerView = findViewById(R.id.tickerView);
-        tickerView.setCharacterLists(TickerUtils.provideNumberList());
-
-        String itemdata = getIntent().getStringExtra("itemdata");
-        try {
-            cryptocurrency = Cryptocurrency.parseData(itemdata);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        // Set up the sparkline SparkView
         adapter = new SparklineAdapter(cryptocurrency.sparklineData7D);
         sparkline.setAdapter(adapter);
         sparkline.setScrubListener(
@@ -87,6 +106,7 @@ public class ItemDetails extends AppCompatActivity {
             }
         );
 
+        // Load initial data and change theme based on price change
         setInitialData(getPriceChange(), getPriceChangePercentage());
         changeTheme(getPriceChange());
     }
@@ -164,6 +184,7 @@ public class ItemDetails extends AppCompatActivity {
 
                         adapter.update(sparkline);
                         setPriceChange(getPriceChange(), getPriceChangePercentage());
+                        changeTheme(getPriceChange());
 
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -3,7 +3,6 @@ package com.example.stocksandcrypto;
 import com.robinhood.spark.SparkAdapter;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class SparklineAdapter extends SparkAdapter {
     public ArrayList<Float> yData;

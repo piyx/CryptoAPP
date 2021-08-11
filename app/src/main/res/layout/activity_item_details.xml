@@ -4,117 +4,123 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/rgbackground"
-    android:scrollbarSize="30sp"
+    android:background="@color/background"
     tools:context=".ItemDetails">
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#140E28"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
-
-        <TextView
-            android:id="@+id/itemname"
-            style="@style/price_down_theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
-            android:fontFamily="@font/robotocondensedbold"
-            android:text="TextView" />
-
-        <com.robinhood.ticker.TickerView
-            android:id="@+id/tickerView"
-            style="@style/price_up_theme"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:text="0.91231" />
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/priceChange"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-US$71.21 (-1.61%)"
-                android:textColor="@color/pink"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/timeline"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_weight="1"
-                android:text="Today"
-                android:textColor="@color/white"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <com.robinhood.spark.SparkView
-            android:id="@+id/sparkline"
             android:layout_width="match_parent"
-            android:layout_height="284dp"
-            android:layout_marginTop="30dp"
-            app:spark_lineColor="@color/pink"
-            app:spark_scrubEnabled="true" />
+            android:layout_height="match_parent"
+            android:background="#140E28"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
-        <RadioGroup
-            android:id="@+id/radiogroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="30sp"
-            android:background="@drawable/radio_group_background"
-            android:gravity="center"
-            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/itemname"
+                style="@style/price_down_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/robotocondensedbold"
+                android:text="TextView" />
 
-            <RadioButton
-                android:id="@+id/oneDay"
-                style="@style/radio_button_style"
-                android:text="1D" />
+            <com.robinhood.ticker.TickerView
+                android:id="@+id/tickerView"
+                style="@style/price_up_theme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="0.91231" />
 
-            <RadioButton
-                android:id="@+id/oneWeek"
-                style="@style/radio_button_style"
-                android:checked="true"
-                android:text="1W" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/oneMonth"
-                style="@style/radio_button_style"
-                android:text="1M" />
+                <TextView
+                    android:id="@+id/priceChange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-US$71.21 (-1.61%)"
+                    android:textColor="@color/pink"
+                    android:textStyle="bold" />
 
-            <RadioButton
-                android:id="@+id/threeMonth"
-                style="@style/radio_button_style"
-                android:text="3M" />
+                <TextView
+                    android:id="@+id/timeline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_weight="1"
+                    android:text="Today"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-            <RadioButton
-                android:id="@+id/oneYear"
-                style="@style/radio_button_style"
-                android:text="1Y" />
+            <com.robinhood.spark.SparkView
+                android:id="@+id/sparkline"
+                android:layout_width="match_parent"
+                android:layout_height="284dp"
+                android:layout_marginTop="30dp"
+                app:spark_lineColor="@color/pink"
+                app:spark_scrubEnabled="true" />
 
-            <RadioButton
-                android:id="@+id/fiveYear"
-                style="@style/radio_button_style"
-                android:text="5Y" />
-        </RadioGroup>
+            <RadioGroup
+                android:id="@+id/radiogroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30sp"
+                android:background="@drawable/radio_group_background"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-    </LinearLayout>
+                <RadioButton
+                    android:id="@+id/oneDay"
+                    style="@style/radio_button_style"
+                    android:text="1D" />
+
+                <RadioButton
+                    android:id="@+id/oneWeek"
+                    style="@style/radio_button_style"
+                    android:checked="true"
+                    android:text="1W" />
+
+                <RadioButton
+                    android:id="@+id/oneMonth"
+                    style="@style/radio_button_style"
+                    android:text="1M" />
+
+                <RadioButton
+                    android:id="@+id/threeMonth"
+                    style="@style/radio_button_style"
+                    android:text="3M" />
+
+                <RadioButton
+                    android:id="@+id/oneYear"
+                    style="@style/radio_button_style"
+                    android:text="1Y" />
+
+                <RadioButton
+                    android:id="@+id/fiveYear"
+                    style="@style/radio_button_style"
+                    android:text="5Y" />
+            </RadioGroup>
+
+        </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

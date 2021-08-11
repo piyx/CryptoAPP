@@ -8,7 +8,8 @@
         <item name="android:textAlignment">center</item>
         <item name="android:layout_width">55dp</item>
         <item name="android:layout_height">36dp</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textColor">@drawable/radio_foreground</item>
     </style>
 
