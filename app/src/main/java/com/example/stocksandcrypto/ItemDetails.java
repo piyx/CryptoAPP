@@ -68,7 +68,7 @@ public class ItemDetails extends AppCompatActivity {
 
         setInitialData();
 
-        adapter = new SparklineAdapter(cryptocurrency.sparklineData);
+        adapter = new SparklineAdapter(cryptocurrency.sparklineData7D);
         sparkline.setAdapter(adapter);
         sparkline.setScrubListener(
             value -> {
@@ -101,6 +101,11 @@ public class ItemDetails extends AppCompatActivity {
     }
 
     protected void getSparkline(Timeline timeline) {
+        if (timeline == Timeline.ONEWEEK) {
+            adapter.update(cryptocurrency.sparklineData7D);
+            return;
+        }
+
         String API_KEY = "8782750913501ee9f64a6169174314b7ef8c1b10";
         String[] dateBounds = PricesTimeline.getStartAndEndDate(timeline);
         String url = String.format(

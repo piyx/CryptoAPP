@@ -20,10 +20,10 @@ public class Cryptocurrency {
     String ath;
     String low24h;
     String high24;
-    ArrayList<Float> sparklineData;
+    ArrayList<Float> sparklineData7D;
 
 
-    public Cryptocurrency(String id, String symbol, String name, String currentPrice, String priceChange, String priceChangePercent, String marketCap, String marketCapRank, String circulatingSupply, String totalSupply, String ath, String low24h, String high24, ArrayList<Float> sparklineData) {
+    public Cryptocurrency(String id, String symbol, String name, String currentPrice, String priceChange, String priceChangePercent, String marketCap, String marketCapRank, String circulatingSupply, String totalSupply, String ath, String low24h, String high24, ArrayList<Float> sparklineData7D) {
         this.id = id;
         this.symbol = symbol;
         this.name = name;
@@ -37,7 +37,7 @@ public class Cryptocurrency {
         this.ath = ath;
         this.low24h = low24h;
         this.high24 = high24;
-        this.sparklineData = sparklineData;
+        this.sparklineData7D = sparklineData7D;
     }
 
     public static Cryptocurrency parseData(String response) throws JSONException {

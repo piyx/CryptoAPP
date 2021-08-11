@@ -95,12 +95,12 @@
             <RadioButton
                 android:id="@+id/oneDay"
                 style="@style/radio_button_style"
-                android:checked="true"
                 android:text="1D" />
 
             <RadioButton
                 android:id="@+id/oneWeek"
                 style="@style/radio_button_style"
+                android:checked="true"
                 android:text="1W" />
 
             <RadioButton
