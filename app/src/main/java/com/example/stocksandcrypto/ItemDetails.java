@@ -35,6 +35,11 @@ public class ItemDetails extends AppCompatActivity {
     SparklineAdapter adapter;
     HashMap<String, Timeline> timelineMap = new HashMap<>();
 
+    // Stats TextView
+    TextView marketRank, marketCap, marketCapChange, marketCapChangePercent;
+    TextView ath, athDate, totalVolume, cirulatingSupply, totalSupply;
+    TextView todaysLow, todaysHigh;
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
@@ -69,6 +74,21 @@ public class ItemDetails extends AppCompatActivity {
         tickerView = findViewById(R.id.tickerView);
         tickerView.setCharacterLists(TickerUtils.provideNumberList());
 
+        // Initialize Stats TextViews
+        marketRank = findViewById(R.id.marketRank);
+        marketCap = findViewById(R.id.marketCap);
+        marketCapChange = findViewById(R.id.marketCapChange);
+        marketCapChangePercent = findViewById(R.id.marketCapChangePercent);
+        todaysLow = findViewById(R.id.todaysLow);
+        todaysHigh = findViewById(R.id.todaysHigh);
+        ath = findViewById(R.id.ath);
+        athDate = findViewById(R.id.athDate);
+        cirulatingSupply = findViewById(R.id.circulatingSupply);
+        totalSupply = findViewById(R.id.totalSupply);
+        totalVolume = findViewById(R.id.todaysVolume);
+
+
+        // Easy way to map timeline text to enum
         timelineMap.put("1D", Timeline.ONEDAY);
         timelineMap.put("1W", Timeline.ONEWEEK);
         timelineMap.put("1M", Timeline.ONEMONTH);
@@ -76,6 +96,19 @@ public class ItemDetails extends AppCompatActivity {
         timelineMap.put("1Y", Timeline.ONEYEAR);
         timelineMap.put("5Y", Timeline.FIVEYEARS);
 
+        // Set statistics data
+        String sign = Float.parseFloat(cryptocurrency.marketCapChangePercent) < 0 ? "-" : "+";
+        marketRank.setText(cryptocurrency.marketCapRank);
+        marketCap.setText("$"+cryptocurrency.marketCap);
+        marketCapChange.setText("$"+cryptocurrency.marketCapChange);
+        marketCapChangePercent.setText(sign + cryptocurrency.marketCapChangePercent + "%");
+        ath.setText("$"+cryptocurrency.ath);
+        athDate.setText(cryptocurrency.athDate);
+        todaysLow.setText("$"+cryptocurrency.low24h);
+        todaysHigh.setText("$"+cryptocurrency.high24);
+        cirulatingSupply.setText(cryptocurrency.circulatingSupply);
+        totalSupply.setText(cryptocurrency.totalSupply);
+        totalVolume.setText("$"+cryptocurrency.totalVolume);
 
         // Set listener for radio group
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {

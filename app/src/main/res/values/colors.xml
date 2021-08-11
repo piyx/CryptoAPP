@@ -20,4 +20,7 @@
     <color name="priceredmedium">#FF913110</color>
     <color name="pricegreen">#FF09c606</color>
     <color name="pricered">#FFfd5001</color>
+    <color name="grey">#FF7a7b7b</color>
+    <color name="greywhite">#FFf1f1f1</color>
+    <color name="darkgrey">#FF333737</color>
 </resources>
