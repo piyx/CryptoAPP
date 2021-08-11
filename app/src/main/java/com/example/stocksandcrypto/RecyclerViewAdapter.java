@@ -64,8 +64,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         sparkline.setAdapter(adapter);
 
         int color = Float.parseFloat(cryptocurrency.priceChange) < 0 ?
-                ContextCompat.getColor(context, R.color.pricered) :
-                ContextCompat.getColor(context, R.color.pricegreen);
+                ContextCompat.getColor(context, R.color.priceredmedium) :
+                ContextCompat.getColor(context, R.color.pricegreenmedium);
 
         sparkline.setLineColor(color);
         tickerView.setTextColor(color);

@@ -14,6 +14,10 @@
     <color name="darkgreen">#FF555f35</color>
     <color name="white">#FFffffff</color>
     <color name="rgbackground">#FF241F32</color>
-    <color name="pricegreen">#FF0c6311</color>
-    <color name="pricered">#FF8b2f14</color>
+    <color name="pricegreendark">#FF0c6311</color>
+    <color name="pricereddark">#FF8b2f14</color>
+    <color name="pricegreenmedium">#FF0c9211</color>
+    <color name="priceredmedium">#FF913110</color>
+    <color name="pricegreen">#FF09c606</color>
+    <color name="pricered">#FFfd5001</color>
 </resources>

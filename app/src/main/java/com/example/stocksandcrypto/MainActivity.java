@@ -31,15 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         // Hide the action bar on home page
         getSupportActionBar().hide();
-        // Change status bar color
-        Window window = getWindow();
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.black));
         // Fetch the top 20 crptos to populate recycler view
         fetchTopCryptoData();
     }
 
     public void fetchTopCryptoData() {
-        String url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1&sparkline=true";
+        String url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=true";
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(
                 Request.Method.GET, url,

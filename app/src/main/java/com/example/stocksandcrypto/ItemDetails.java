@@ -125,8 +125,8 @@ public class ItemDetails extends AppCompatActivity {
     }
 
     protected void changeTheme(float priceChange) {
-        int pink = ContextCompat.getColor(this, R.color.pink);
-        int green = ContextCompat.getColor(this, R.color.green);
+        int pink = ContextCompat.getColor(this, R.color.pricered);
+        int green = ContextCompat.getColor(this, R.color.pricegreen);
 
         RadioButton checkedRB = findViewById(radioGroup.getCheckedRadioButtonId());
         if (priceChange < 0) {
@@ -147,8 +147,8 @@ public class ItemDetails extends AppCompatActivity {
         String format = String.format("%sUS$%f (%s%f)", sign, Math.abs(priceChange), sign, Math.abs(priceChangePercent));
         priceChangeTV.setText(format);
         int color = priceChange < 0 ?
-                ContextCompat.getColor(this, R.color.pink) :
-                ContextCompat.getColor(this, R.color.green);
+                ContextCompat.getColor(this, R.color.pricered) :
+                ContextCompat.getColor(this, R.color.pricegreen);
 
         priceChangeTV.setTextColor(color);
     }
