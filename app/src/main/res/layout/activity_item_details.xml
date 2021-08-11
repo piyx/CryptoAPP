@@ -15,38 +15,30 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/itemname"
+            style="@style/price_down_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
             android:fontFamily="@font/robotocondensedbold"
-            android:shadowColor="@color/pink"
-            android:shadowDx="0"
-            android:shadowRadius="20"
-            android:text="TextView"
-            android:textColor="@color/white"
-            android:textSize="40sp"
-            android:textStyle="normal" />
+            android:text="TextView" />
 
         <com.robinhood.ticker.TickerView
             android:id="@+id/tickerView"
+            style="@style/price_up_theme"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:shadowColor="@color/pink"
-            android:shadowDx="0"
-            android:shadowRadius="20"
-            android:text="0.91231"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            android:textStyle="bold" />
+            android:text="0.91231" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -77,7 +69,7 @@
         <com.robinhood.spark.SparkView
             android:id="@+id/sparkline"
             android:layout_width="match_parent"
-            android:layout_height="342dp"
+            android:layout_height="284dp"
             android:layout_marginTop="30dp"
             app:spark_lineColor="@color/pink"
             app:spark_scrubEnabled="true" />
@@ -122,7 +114,6 @@
                 android:id="@+id/fiveYear"
                 style="@style/radio_button_style"
                 android:text="5Y" />
-
         </RadioGroup>
 
     </LinearLayout>

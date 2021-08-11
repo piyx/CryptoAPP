@@ -1,10 +1,15 @@
 package com.example.stocksandcrypto;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 
 enum Timeline {
-    ONEDAY, ONEWEEK, ONEMONTH, THREEMONTHS, ONEYEAR, FIVEYEARS
+    ONEDAY("Today"), ONEWEEK("Past week"), ONEMONTH("Past month"),
+    THREEMONTHS("Past 3M"), ONEYEAR("Past Year"), FIVEYEARS("Past 5 Years");
+
+    public String timelineText;
+    Timeline(String timelineText) {
+        this.timelineText = timelineText;
+    }
 }
 
 public class PricesTimeline {
@@ -13,9 +18,6 @@ public class PricesTimeline {
         LocalDate startDate;
 
         switch (timeline) {
-            case ONEDAY:
-                startDate = LocalDate.now().minusDays(1);
-                break;
             case ONEWEEK:
                 startDate = LocalDate.now().minusDays(7);
                 break;

@@ -1,6 +1,7 @@
 package com.example.stocksandcrypto;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.airbnb.paris.Paris;
+import com.airbnb.paris.styles.Style;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ItemDetails extends AppCompatActivity {
-    TextView itemname, priceChangeTV, timeline;
+    TextView itemname, priceChangeTV, timelineText;
     TickerView tickerView;
     SparkView sparkline;
     Cryptocurrency cryptocurrency;
@@ -39,7 +42,7 @@ public class ItemDetails extends AppCompatActivity {
         sparkline = findViewById(R.id.sparkline);
         itemname = findViewById(R.id.itemname);
         priceChangeTV = findViewById(R.id.priceChange);
-        timeline = findViewById(R.id.timeline);
+        timelineText = findViewById(R.id.timeline);
         radioGroup = findViewById(R.id.radiogroup);
 
         timelineMap.put("1D", Timeline.ONEDAY);
@@ -53,7 +56,10 @@ public class ItemDetails extends AppCompatActivity {
 
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             RadioButton rb = group.findViewById(checkedId);
-            getSparkline(timelineMap.get(rb.getText()));
+            Timeline timeline = timelineMap.get(rb.getText());
+            timelineText.setText(timeline.timelineText);
+            getSparkline(timeline);
+            changeTheme(getPriceChange());
         });
 
         tickerView = findViewById(R.id.tickerView);
@@ -66,13 +72,11 @@ public class ItemDetails extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        setInitialData();
-
         adapter = new SparklineAdapter(cryptocurrency.sparklineData7D);
         sparkline.setAdapter(adapter);
         sparkline.setScrubListener(
             value -> {
-                if (value == null) { setInitialData(); }
+                if (value == null) { setInitialData(getPriceChange(), getPriceChangePercentage()); }
                 else {
                     float initialValue = sparkline.getAdapter().getY(0);
                     float priceChange = (float)value - initialValue;
@@ -82,27 +86,62 @@ public class ItemDetails extends AppCompatActivity {
                 }
             }
         );
+
+        setInitialData(getPriceChange(), getPriceChangePercentage());
+        changeTheme(getPriceChange());
     }
 
-    protected void setInitialData() {
+    protected float getPriceChange() {
+        float initialPrice = adapter.yData.get(0);
+        float currentPrice = adapter.yData.get(adapter.getCount()-1);
+        return currentPrice-initialPrice;
+    }
+
+    protected float getPriceChangePercentage() {
+        float priceChange = getPriceChange();
+        return priceChange/adapter.getY(0) * 100;
+    }
+
+    protected void setInitialData(float priceChange, float priceChangePercent) {
         itemname.setText(cryptocurrency.name);
         tickerView.setText("$" + cryptocurrency.currentPrice);
-
-        float priceChange = Float.parseFloat(cryptocurrency.priceChange);
-        float priceChangePercent = Float.parseFloat(cryptocurrency.priceChangePercent);
         setPriceChange(priceChange, priceChangePercent);
 
+    }
+
+    protected void changeTheme(float priceChange) {
+        int pink = ContextCompat.getColor(this, R.color.pink);
+        int green = ContextCompat.getColor(this, R.color.green);
+
+        RadioButton checkedRB = findViewById(radioGroup.getCheckedRadioButtonId());
+        if (priceChange < 0) {
+            itemname.setTextAppearance(R.style.price_down_theme);
+            priceChangeTV.setTextColor(pink);
+            sparkline.setLineColor(pink);
+            checkedRB.setBackgroundResource(R.drawable.radio_background_down);
+        } else {
+            itemname.setTextAppearance(R.style.price_up_theme);
+            priceChangeTV.setTextColor(green);
+            sparkline.setLineColor(green);
+            checkedRB.setBackgroundResource(R.drawable.radio_background_up);
+        }
     }
 
     protected void setPriceChange(float priceChange, float priceChangePercent) {
         String sign = priceChange < 0 ? "-" : "+";
         String format = String.format("%sUS$%f (%s%f)", sign, Math.abs(priceChange), sign, Math.abs(priceChangePercent));
         priceChangeTV.setText(format);
+        int color = priceChange < 0 ?
+                ContextCompat.getColor(this, R.color.pink) :
+                ContextCompat.getColor(this, R.color.green);
+
+        priceChangeTV.setTextColor(color);
     }
 
     protected void getSparkline(Timeline timeline) {
         if (timeline == Timeline.ONEWEEK) {
             adapter.update(cryptocurrency.sparklineData7D);
+            setPriceChange(getPriceChange(), getPriceChangePercentage());
             return;
         }
 
@@ -124,6 +163,8 @@ public class ItemDetails extends AppCompatActivity {
                         }
 
                         adapter.update(sparkline);
+                        setPriceChange(getPriceChange(), getPriceChangePercentage());
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
