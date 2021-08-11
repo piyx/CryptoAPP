@@ -52,13 +52,8 @@ public class ItemDetails extends AppCompatActivity {
         setContentView(R.layout.activity_item_details);
 
 
-        // Get the data from intent and parse it
-        String itemdata = getIntent().getStringExtra("itemdata");
-        try {
-            cryptocurrency = Cryptocurrency.parseData(itemdata);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        // Get the data from intent
+        cryptocurrency = (Cryptocurrency) getIntent().getSerializableExtra("itemdata");
 
         // Change action bar to add back button and change its text
         ActionBar actionBar = getSupportActionBar();
@@ -160,8 +155,11 @@ public class ItemDetails extends AppCompatActivity {
 
     protected void getSparkline(Timeline timeline) {
         if (timeline == Timeline.ONEWEEK) {
+            float priceChange = getPriceChange();
+            float priceChangePercent = getPriceChangePercentage();
             adapter.update(cryptocurrency.sparklineData7D);
-            setPriceChange(getPriceChange(), getPriceChangePercentage());
+            setPriceChange(priceChange, priceChangePercent);
+            changeTheme(priceChange);
             return;
         }
 

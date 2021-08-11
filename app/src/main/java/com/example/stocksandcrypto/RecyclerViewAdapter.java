@@ -35,7 +35,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View rowItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyler_view_row, parent, false);
-        return new ViewHolder(rowItem, context);
+        ViewHolder holder = new ViewHolder(rowItem, context);
+        rowItem.setOnClickListener(v -> {
+            int position = holder.getAdapterPosition();
+            if (position != RecyclerView.NO_POSITION) {
+                Cryptocurrency cryptocurrency = this.data.get(position);
+                Intent intent = new Intent(context, ItemDetails.class);
+                intent.putExtra("itemdata", cryptocurrency);
+                context.startActivity(intent);
+            }
+        });
+        return holder;
     }
 
     @Override
@@ -66,23 +76,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return this.data.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public LinearLayout linearLayout;
         public Context context;
-        public Cryptocurrency cryptocurrency;
 
         public ViewHolder(View view, Context context) {
             super(view);
-            view.setOnClickListener(this);
             this.linearLayout = view.findViewById(R.id.linearLayoutRow);
             this.context = context;
-        }
-
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(context, ItemDetails.class);
-            intent.putExtra("itemdata", "okay");
-            context.startActivity(intent);
         }
     }
 }

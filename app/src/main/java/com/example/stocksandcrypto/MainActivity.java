@@ -39,15 +39,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void fetchTopCryptoData() {
-        String url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=20&page=1&sparkline=true";
+        String url = "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=30&page=1&sparkline=true";
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(
                 Request.Method.GET, url,
                 response -> {
                     try {
-                        System.out.println("start-----------------------------------------------------------");
-                        System.out.println(response);
-                        System.out.println("end-------------------------------------------------------------");
                         ArrayList<Cryptocurrency> topCrypos = new ArrayList<>();
                         JSONArray topCryptoData = new JSONArray(response);
                         for (int i = 0; i < topCryptoData.length(); i++) {
