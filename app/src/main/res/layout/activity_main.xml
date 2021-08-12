@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black"
@@ -29,7 +29,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/cryptoListRV"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_below="@id/header" />
 
-    </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:indeterminateDrawable="@drawable/progress_bar_style"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignBottom="@id/cryptoListRV"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

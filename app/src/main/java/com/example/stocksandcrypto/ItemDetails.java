@@ -185,16 +185,19 @@ public class ItemDetails extends AppCompatActivity {
         priceChangeTV.setTextColor(color);
     }
 
+    protected void updateSparklineAndTheme(ArrayList<Float> sparkline) {
+        adapter.update(sparkline);
+        float priceChange = getPriceChange();
+        float priceChangePercent = getPriceChangePercentage();
+        setPriceChange(priceChange, priceChangePercent);
+        changeTheme(priceChange);
+    }
+
     protected void getSparkline(Timeline timeline) {
         if (timeline == Timeline.ONEWEEK) {
-            float priceChange = getPriceChange();
-            float priceChangePercent = getPriceChangePercentage();
-            adapter.update(cryptocurrency.sparklineData7D);
-            setPriceChange(priceChange, priceChangePercent);
-            changeTheme(priceChange);
+            updateSparklineAndTheme(cryptocurrency.sparklineData7D);
             return;
         }
-
         String API_KEY = "8782750913501ee9f64a6169174314b7ef8c1b10";
         String[] dateBounds = PricesTimeline.getStartAndEndDate(timeline);
         String url = String.format(
@@ -212,9 +215,7 @@ public class ItemDetails extends AppCompatActivity {
                             sparkline.add(Float.parseFloat(prices.getString(i)));
                         }
 
-                        adapter.update(sparkline);
-                        setPriceChange(getPriceChange(), getPriceChangePercentage());
-                        changeTheme(getPriceChange());
+                        updateSparklineAndTheme(sparkline);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
