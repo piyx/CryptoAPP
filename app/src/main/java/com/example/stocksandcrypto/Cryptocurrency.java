@@ -36,17 +36,17 @@ public class Cryptocurrency implements Serializable {
         this.name = name;
         this.currentPrice = currentPrice;
         this.priceChange = priceChange;
-        this.marketCap = Utils.formatLargeNumber(marketCap);
+        this.marketCap = marketCap;
         this.marketCapRank = marketCapRank;
-        this.circulatingSupply = Utils.formatLargeNumber(circulatingSupply);
-        this.totalSupply = Utils.formatLargeNumber(totalSupply);
-        this.ath = Utils.formatLargeNumber(ath);
-        this.athDate = Utils.formatDate(athDate);
-        this.marketCapChange = Utils.formatLargeNumber(marketCapChange);
-        this.marketCapChangePercent = Utils.formatLargeNumber(marketCapChangePercent);
-        this.totalVolume = Utils.formatLargeNumber(totalVolume);
-        this.low24h = Utils.formatLargeNumber(low24h);
-        this.high24 = Utils.formatLargeNumber(high24);
+        this.circulatingSupply = circulatingSupply;
+        this.totalSupply = totalSupply;
+        this.ath = ath;
+        this.athDate = athDate;
+        this.marketCapChange = marketCapChange;
+        this.marketCapChangePercent = marketCapChangePercent;
+        this.totalVolume = totalVolume;
+        this.low24h = low24h;
+        this.high24 = high24;
         this.sparklineData7D = sparklineData7D;
     }
 
@@ -58,23 +58,40 @@ public class Cryptocurrency implements Serializable {
             sparklineData.add(Float.parseFloat(sparkline.getString(i)));
         }
 
+        String id = cryptodata.getString("id");
+        String symbol = cryptodata.getString("symbol");
+        String name = cryptodata.getString("name");
+        String currentPrice = cryptodata.getString("current_price");
+        String priceChangePercent = cryptodata.getString("price_change_24h");
+        String marketCap = cryptodata.getString("market_cap");
+        String marketCapRank = cryptodata.getString("market_cap_rank");
+        String circulatingSupply = cryptodata.getString("circulating_supply");
+        String totalSupply = cryptodata.getString("total_supply");
+        String ath = cryptodata.getString("ath");
+        String athDate = cryptodata.getString("ath_date");
+        String marketCapChange = cryptodata.getString("market_cap_change_24h");
+        String marketCapChangePercent = cryptodata.getString("market_cap_change_percentage_24h");
+        String totalvolume = cryptodata.getString("total_volume");
+        String low24h = cryptodata.getString("low_24h");
+        String high24h = cryptodata.getString("high_24h");
+
         return new Cryptocurrency(
-            cryptodata.getString("id"),
-            cryptodata.getString("symbol"),
-            cryptodata.getString("name"),
-            cryptodata.getString("current_price"),
-            cryptodata.getString("price_change_24h"),
-            cryptodata.getString("market_cap"),
-            cryptodata.getString("market_cap_rank"),
-            cryptodata.getString("circulating_supply"),
-            cryptodata.getString("total_supply"),
-            cryptodata.getString("ath"),
-            cryptodata.getString("ath_date"),
-            cryptodata.getString("market_cap_change_24h"),
-            cryptodata.getString("market_cap_change_percentage_24h"),
-            cryptodata.getString("total_volume"),
-            cryptodata.getString("low_24h"),
-            cryptodata.getString("high_24h"),
+            id,
+            symbol,
+            name,
+            currentPrice,
+            priceChangePercent,
+            Utils.formatLargeNumber(marketCap),
+            marketCapRank,
+            Utils.formatLargeNumber(circulatingSupply),
+            Utils.formatLargeNumber(totalSupply),
+            Utils.formatPrice(ath),
+            Utils.formatDate(athDate),
+            Utils.formatPrice(marketCapChange),
+            Utils.formatPercentChange(marketCapChangePercent),
+            Utils.formatPrice(totalvolume),
+            Utils.formatPrice(low24h),
+            Utils.formatPrice(high24h),
             sparklineData
         );
     }

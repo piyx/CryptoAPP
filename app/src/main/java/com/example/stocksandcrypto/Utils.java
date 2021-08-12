@@ -26,9 +26,23 @@ public class Utils {
         return String.format("%.2f%s", formattedNum, suffix);
     }
 
+    public static String formatPrice(String price) {
+        Float p = Float.parseFloat(price);
+        String sign = p < 0 ? "-" : "";
+        p = Math.abs(p);
+        return String.format("%s$%s", sign, formatLargeNumber(p.toString()));
+    }
+
+    public static String formatPercentChange(String percentChange) {
+        Float p = Float.parseFloat(percentChange);
+        String sign = p < 0 ? "-" : "+";
+        p = Math.abs(p);
+        return String.format("%s%s", sign, formatLargeNumber(p.toString())) + "%";
+    }
+
     public static String formatDate(String date) {
         date = date.substring(0, 10);
         LocalDate datetime = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return datetime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        return datetime.format(DateTimeFormatter.ofPattern("dd LLLL yyyy"));
     }
 }

@@ -97,18 +97,17 @@ public class ItemDetails extends AppCompatActivity {
         timelineMap.put("5Y", Timeline.FIVEYEARS);
 
         // Set statistics data
-        String sign = Float.parseFloat(cryptocurrency.marketCapChangePercent) < 0 ? "-" : "+";
         marketRank.setText(cryptocurrency.marketCapRank);
-        marketCap.setText("$"+cryptocurrency.marketCap);
-        marketCapChange.setText("$"+cryptocurrency.marketCapChange);
-        marketCapChangePercent.setText(sign + cryptocurrency.marketCapChangePercent + "%");
-        ath.setText("$"+cryptocurrency.ath);
+        marketCap.setText(cryptocurrency.marketCap);
+        marketCapChange.setText(cryptocurrency.marketCapChange);
+        marketCapChangePercent.setText(cryptocurrency.marketCapChangePercent);
+        ath.setText(cryptocurrency.ath);
         athDate.setText(cryptocurrency.athDate);
-        todaysLow.setText("$"+cryptocurrency.low24h);
-        todaysHigh.setText("$"+cryptocurrency.high24);
+        todaysLow.setText(cryptocurrency.low24h);
+        todaysHigh.setText(cryptocurrency.high24);
         cirulatingSupply.setText(cryptocurrency.circulatingSupply);
         totalSupply.setText(cryptocurrency.totalSupply);
-        totalVolume.setText("$"+cryptocurrency.totalVolume);
+        totalVolume.setText(cryptocurrency.totalVolume);
 
         // Set listener for radio group
         radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
