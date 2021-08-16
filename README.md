@@ -3,7 +3,8 @@ Minimalistic crypto app to display cryptocurrency data with robinhood style them
 
 ## NOTE:
 
-This project was made purely for educational and learning purpose.
+**This project was made purely for educational and learning purpose.**
+
 
 ## Screenshots
 
@@ -19,8 +20,13 @@ This project was made purely for educational and learning purpose.
 <img src="screenshots/pricered.jpg" width="49.5%"> <img src="screenshots/daired.jpg" width="49.5%">
 
 
-## References
+## Libraries Used
 
 1. Volley (https://github.com/google/volley)
 2. Spark (https://github.com/robinhood/spark)
 3. Ticker (https://github.com/robinhood/ticker)
+
+## References
+
+1. CoinGecko API v3 (https://www.coingecko.com/api/documentations/v3)
+2. Nomics Sparkline Data API (https://nomics.com/docs/#operation/getCurrenciesSparkline)
