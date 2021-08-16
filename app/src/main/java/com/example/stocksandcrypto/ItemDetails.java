@@ -153,7 +153,6 @@ public class ItemDetails extends AppCompatActivity {
         itemname.setText(cryptocurrency.name);
         tickerView.setText("$" + cryptocurrency.currentPrice);
         setPriceChange(priceChange, priceChangePercent);
-
     }
 
     protected void changeTheme(float priceChange) {

@@ -30,7 +30,8 @@
             android:id="@+id/cryptoListRV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/header" />
+            android:layout_below="@id/header"
+            android:layout_marginTop="2dp" />
 
         <ProgressBar
             android:id="@+id/progressBar"
