@@ -19,6 +19,9 @@ Minimalistic crypto app to display cryptocurrency data with robinhood style them
 ### Dynamic Theme
 <img src="screenshots/pricered.jpg" width="49.5%"> <img src="screenshots/daired.jpg" width="49.5%">
 
+### Scrub Enabled In Sparkline
+<img src="screenshots/scrubbinggreen.jpg" width="49.5%"> <img src="screenshots/scrubbingred.jpg" width="49.5%">
+
 
 ## Libraries Used
 
