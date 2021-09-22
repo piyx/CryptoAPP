@@ -3,6 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/drawable/progress_bar_style.xml" value="0.2703125" />
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/drawable/radio_background_down.xml" value="0.2703125" />
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/drawable/radio_background_up.xml" value="0.2703125" />
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/drawable/radio_shape_checked_down.xml" value="0.2703125" />
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/drawable/radio_shape_checked_up.xml" value="0.2703125" />
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/font/roboto_bold.xml" value="0.284375" />
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/font/roboto_condensed_bold.xml" value="0.284375" />
+        <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/font/roboto_thin.xml" value="0.284375" />
         <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/layout/activity_item_details.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/layout/activity_main.xml" value="0.20742753623188406" />
         <entry key="..\:/Users/user/Desktop/CryptoAPP/app/src/main/res/layout/recyler_view_row.xml" value="0.25416666666666665" />

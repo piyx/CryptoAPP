@@ -62,7 +62,7 @@ public class Cryptocurrency implements Serializable {
         String symbol = cryptodata.getString("symbol");
         String name = cryptodata.getString("name");
         String currentPrice = cryptodata.getString("current_price");
-        String priceChangePercent = cryptodata.getString("price_change_24h");
+        String priceChange = cryptodata.getString("price_change_24h");
         String marketCap = cryptodata.getString("market_cap");
         String marketCapRank = cryptodata.getString("market_cap_rank");
         String circulatingSupply = cryptodata.getString("circulating_supply");
@@ -80,7 +80,7 @@ public class Cryptocurrency implements Serializable {
             symbol,
             name,
             currentPrice,
-            priceChangePercent,
+            priceChange,
             Utils.formatLargeNumber(marketCap),
             marketCapRank,
             Utils.formatLargeNumber(circulatingSupply),
